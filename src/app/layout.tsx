@@ -1,23 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/content/site";
 import { RevealObserver } from "@/components/layout/RevealObserver";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+/*
+ * Fontes locais (src/app/fonts) — os mesmos arquivos variáveis que o Google Fonts
+ * entregava ao next/font/google, agora sem download durante o build.
+ * Cada peso é declarado separadamente, como no CSS do Google, para manter a
+ * renderização idêntica (o mesmo arquivo variável atende a todos os pesos).
+ */
+const cormorant = localFont({
+  src: [
+    { path: "./fonts/cormorant-garamond-latin-wght-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/cormorant-garamond-latin-wght-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/cormorant-garamond-latin-wght-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/cormorant-garamond-latin-wght-italic.woff2", weight: "500", style: "italic" },
+  ],
   variable: "--font-cormorant",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const manrope = localFont({
+  src: [
+    { path: "./fonts/manrope-latin-wght-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/manrope-latin-wght-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/manrope-latin-wght-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/manrope-latin-wght-normal.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-manrope",
   display: "swap",
+  adjustFontFallback: "Arial",
 });
 
 export const metadata: Metadata = {
