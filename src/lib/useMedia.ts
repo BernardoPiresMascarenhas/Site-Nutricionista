@@ -1,0 +1,15 @@
+"use client";
+import { useEffect, useState } from "react";
+
+/** Acompanha uma media query (false no servidor e antes da hidratação). */
+export function useMedia(query: string) {
+  const [match, setMatch] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setMatch(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, [query]);
+  return match;
+}
